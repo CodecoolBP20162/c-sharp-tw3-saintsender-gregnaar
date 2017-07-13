@@ -144,5 +144,34 @@ namespace SaintSender
             LoggedIn = false;
             this.Serialize();
         }
+
+        public List<IMailFolder> getFolders()
+        {
+            using (var client = new ImapClient())
+            {
+                client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+
+                client.Connect("imap.gmail.com", 993, true);
+                client.AuthenticationMechanisms.Remove("XOAUTH2");
+
+                client.Authenticate(this.EmailAddress, this.Password);
+                List<IMailFolder> folders = new List<IMailFolder>();
+
+                if ((client.Capabilities & (ImapCapabilities.SpecialUse | ImapCapabilities.XList)) != 0)
+                {
+                    folders.Add(client.GetFolder(SpecialFolder.All));
+                    //folders.Add(client.GetFolder(SpecialFolder.Archive));
+                    folders.Add(client.GetFolder(SpecialFolder.Drafts));
+                    folders.Add(client.GetFolder(SpecialFolder.Flagged));
+                    folders.Add(client.GetFolder(SpecialFolder.Junk));
+                    folders.Add(client.GetFolder(SpecialFolder.Sent));
+                    folders.Add(client.GetFolder(SpecialFolder.Trash));
+            
+                }
+                client.Disconnect(true);
+                return folders;
+            }
+
+        }
     }
 }

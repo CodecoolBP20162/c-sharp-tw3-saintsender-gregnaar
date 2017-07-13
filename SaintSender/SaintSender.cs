@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MimeKit;
 using System.Threading;
 using System.Text.RegularExpressions;
+using MailKit;
 
 namespace SaintSender
 {
@@ -39,7 +40,7 @@ namespace SaintSender
             }
             getNewMails();
             refreshMails();
-
+            ListFolders();
         }
 
         private void btnSendEmail_Click(object sender, EventArgs e)
@@ -110,7 +111,7 @@ namespace SaintSender
                 ListViewItem mail = new ListViewItem(messageList[i].From.ToString(), 0);
                 ListViewItem.ListViewSubItem[] subItems = new ListViewItem.ListViewSubItem[]
                           {
-                                new ListViewItem.ListViewSubItem(mail, messageList[i].Date.ToString()),
+                                new ListViewItem.ListViewSubItem(mail, messageList[i].Date.ToString().Substring(0,20)),
                                 new ListViewItem.ListViewSubItem(mail, messageList[i].Subject),
                                 new ListViewItem.ListViewSubItem(mail, messageList[i].TextBody.Substring(0,6)+" ..."),
                           };
@@ -118,6 +119,18 @@ namespace SaintSender
                 listViewEmails.Items.Add(mail);
             }
             listViewEmails.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+        private void ListFolders()
+        {
+            List<IMailFolder> folders = account.getFolders();
+            
+            foreach (IMailFolder folder in folders)
+            {
+                ListViewItem fol = new ListViewItem(folder.Name.ToString(), 0);
+
+                listViewFolders.Items.Add(fol);
+            }
         }
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)

@@ -50,13 +50,13 @@
             this.txtEmailAddress = new System.Windows.Forms.TextBox();
             this.pnlLogIn = new System.Windows.Forms.Panel();
             this.pnlMain = new System.Windows.Forms.Panel();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.RefreshTimer = new System.Windows.Forms.Timer(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.menu.SuspendLayout();
             this.pnlLogIn.SuspendLayout();
             this.pnlMain.SuspendLayout();
@@ -132,6 +132,7 @@
             this.listViewFolders.SmallImageList = this.imageList1;
             this.listViewFolders.TabIndex = 6;
             this.listViewFolders.UseCompatibleStateImageBehavior = false;
+            this.listViewFolders.View = System.Windows.Forms.View.List;
             // 
             // imageList1
             // 
@@ -232,6 +233,32 @@
             this.pnlMain.Size = new System.Drawing.Size(857, 546);
             this.pnlMain.TabIndex = 17;
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(620, 512);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 14;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(375, 512);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(203, 20);
+            this.txtSearch.TabIndex = 13;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(283, 516);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(85, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Search by email:";
+            // 
             // btnRefresh
             // 
             this.btnRefresh.Location = new System.Drawing.Point(769, 4);
@@ -265,32 +292,6 @@
             this.RefreshTimer.Enabled = true;
             this.RefreshTimer.Interval = 150000;
             this.RefreshTimer.Tick += new System.EventHandler(this.RefreshTimer_Tick);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(283, 516);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(85, 13);
-            this.label3.TabIndex = 12;
-            this.label3.Text = "Search by email:";
-            // 
-            // txtSearch
-            // 
-            this.txtSearch.Location = new System.Drawing.Point(375, 512);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(203, 20);
-            this.txtSearch.TabIndex = 13;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(620, 512);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 14;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // SaintSender
             // 
