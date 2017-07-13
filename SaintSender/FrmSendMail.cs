@@ -18,6 +18,12 @@ namespace SaintSender
         {
             InitializeComponent();
         }
+        public FrmSendMail(MimeKit.MimeMessage message)
+        {
+            InitializeComponent();
+            txtTo.Text = message.From.ToString();
+            txtSubject.Text = "RE: " + message.Subject;
+        }
 
         private void FrmSendMail_Load(object sender, EventArgs e)
         {

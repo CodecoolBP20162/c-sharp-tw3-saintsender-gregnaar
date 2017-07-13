@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaintSender));
             this.listViewEmails = new System.Windows.Forms.ListView();
             this.Sender = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Recieved = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Subject = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Body = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menu = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -52,8 +53,10 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.Recieved = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.RefreshTimer = new System.Windows.Forms.Timer(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             this.menu.SuspendLayout();
             this.pnlLogIn.SuspendLayout();
             this.pnlMain.SuspendLayout();
@@ -75,10 +78,16 @@
             this.listViewEmails.TabIndex = 7;
             this.listViewEmails.UseCompatibleStateImageBehavior = false;
             this.listViewEmails.View = System.Windows.Forms.View.Details;
+            this.listViewEmails.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewEmails_ItemSelectionChanged);
+            this.listViewEmails.DoubleClick += new System.EventHandler(this.listViewEmails_DoubleClick);
             // 
             // Sender
             // 
             this.Sender.Text = "Sender:";
+            // 
+            // Recieved
+            // 
+            this.Recieved.Text = "Recieved:";
             // 
             // Subject
             // 
@@ -208,6 +217,9 @@
             // 
             // pnlMain
             // 
+            this.pnlMain.Controls.Add(this.btnSearch);
+            this.pnlMain.Controls.Add(this.txtSearch);
+            this.pnlMain.Controls.Add(this.label3);
             this.pnlMain.Controls.Add(this.btnRefresh);
             this.pnlMain.Controls.Add(this.btnSendEmail);
             this.pnlMain.Controls.Add(this.label1);
@@ -248,15 +260,37 @@
             this.label2.TabIndex = 9;
             this.label2.Text = "Emails:";
             // 
-            // Recieved
-            // 
-            this.Recieved.Text = "Recieved:";
-            // 
             // RefreshTimer
             // 
             this.RefreshTimer.Enabled = true;
-            this.RefreshTimer.Interval = 300000;
+            this.RefreshTimer.Interval = 150000;
             this.RefreshTimer.Tick += new System.EventHandler(this.RefreshTimer_Tick);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(283, 516);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(85, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Search by email:";
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(375, 512);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(203, 20);
+            this.txtSearch.TabIndex = 13;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(620, 512);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 14;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // SaintSender
             // 
@@ -304,6 +338,9 @@
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ColumnHeader Recieved;
         private System.Windows.Forms.Timer RefreshTimer;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Label label3;
     }
 }
 

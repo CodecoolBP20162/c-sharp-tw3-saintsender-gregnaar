@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MimeKit;
 using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace SaintSender
 {
@@ -16,6 +17,7 @@ namespace SaintSender
     {
         Account account;
         List<MimeKit.MimeMessage> messageList;
+        int selectedEmailIndex;
 
         public SaintSender()
         {
@@ -88,6 +90,7 @@ namespace SaintSender
         {
             Thread t = new Thread(new ThreadStart(getNewMails));
             Thread main = Thread.CurrentThread;
+
             t.Start();
             refreshMails();
         }
@@ -109,17 +112,18 @@ namespace SaintSender
                           {
                                 new ListViewItem.ListViewSubItem(mail, messageList[i].Date.ToString()),
                                 new ListViewItem.ListViewSubItem(mail, messageList[i].Subject),
-                                new ListViewItem.ListViewSubItem(mail, messageList[i].TextBody),
+                                new ListViewItem.ListViewSubItem(mail, messageList[i].TextBody.Substring(0,6)+" ..."),
                           };
                 mail.SubItems.AddRange(subItems);
                 listViewEmails.Items.Add(mail);
             }
             listViewEmails.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
-
+        
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             account.ArchiveMails(messageList);
+            MessageBox.Show("Mails archived!");
         }
 
         private void RefreshTimer_Tick(object sender, EventArgs e)
@@ -127,6 +131,36 @@ namespace SaintSender
             Thread t = new Thread(new ThreadStart(getNewMails));
             Thread main = Thread.CurrentThread;
             t.Start();
+            refreshMails();
+        }
+
+        private void listViewEmails_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (listViewEmails.SelectedItems != null && listViewEmails.SelectedItems.Count > 0)
+            {
+                selectedEmailIndex = listViewEmails.FocusedItem.Index;
+            }
+            
+        }
+
+        private void listViewEmails_DoubleClick(object sender, EventArgs e)
+        {
+            frmReadMail rdml = new frmReadMail(messageList[messageList.Count - (selectedEmailIndex + 1)]);
+            rdml.Show();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            Regex pattern = new Regex(txtSearch.Text);
+            List<MimeKit.MimeMessage> messagetmp = new List<MimeMessage>();
+            foreach (MimeKit.MimeMessage message in messageList)
+            {
+                if (pattern.IsMatch(message.From.ToString()))
+                {
+                    messagetmp.Add(message);
+                }
+            }
+            messageList = messagetmp;
             refreshMails();
         }
     }

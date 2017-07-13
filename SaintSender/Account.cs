@@ -110,22 +110,22 @@ namespace SaintSender
 
         public void ArchiveMails(List<MimeKit.MimeMessage> emailList)
         {
-            int i = 0;
             foreach(MimeKit.MimeMessage message in emailList)
             {
-                string path = i + ".txt";
+                
+                string path = message.Date.ToString().Substring(0, 19).Replace(".","").Replace(":", "") + ".txt";
                 Console.WriteLine(path);
                 if (!File.Exists(path))
                 {
-                    File.Create(path);
+                    //File.Create(path);
                     TextWriter tw = new StreamWriter(path);
-                    tw.WriteLine("From: " + message.From);
-                    tw.WriteLine("Subject: " + message.Subject);
-                    tw.WriteLine("Body: " + message.Body);
+                    tw.WriteLine("From: " + message.From.ToString());
+                    tw.WriteLine("Date: " + message.Date.ToString());
+                    tw.WriteLine("Subject: " + message.Subject.ToString());
+                    tw.WriteLine("Body: \n" + message.TextBody.ToString());
                     tw.Close();
-                    i++;
+                    
                 }
-                i++;
             }
         }
 

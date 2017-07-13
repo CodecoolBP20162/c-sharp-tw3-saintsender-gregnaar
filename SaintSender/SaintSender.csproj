@@ -55,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmReadMail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReadMail.Designer.cs">
+      <DependentUpon>frmReadMail.cs</DependentUpon>
+    </Compile>
     <Compile Include="RegexValidation.cs" />
     <Compile Include="Account.cs" />
     <Compile Include="SaintSender.cs">
@@ -71,6 +77,9 @@
     <Compile Include="FrmSendMail.Designer.cs">
       <DependentUpon>FrmSendMail.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmReadMail.resx">
+      <DependentUpon>frmReadMail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmSendMail.resx">
       <DependentUpon>FrmSendMail.cs</DependentUpon>
     </EmbeddedResource>
