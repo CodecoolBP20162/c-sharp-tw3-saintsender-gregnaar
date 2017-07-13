@@ -94,7 +94,7 @@ namespace SaintSender
             t.Start();
             refreshMails();
         }
-        
+
         private void getNewMails()
         {
             messageList = account.GetMailsFromInbox();
@@ -103,11 +103,11 @@ namespace SaintSender
         private void refreshMails()
         {
             listViewEmails.Items.Clear();
-            
+
             for (int i = messageList.Count - 1; i != 0; i--)
             {
 
-                ListViewItem mail = new ListViewItem(messageList[i].From.ToString(),0);
+                ListViewItem mail = new ListViewItem(messageList[i].From.ToString(), 0);
                 ListViewItem.ListViewSubItem[] subItems = new ListViewItem.ListViewSubItem[]
                           {
                                 new ListViewItem.ListViewSubItem(mail, messageList[i].Date.ToString()),
@@ -119,7 +119,7 @@ namespace SaintSender
             }
             listViewEmails.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
-        
+
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             account.ArchiveMails(messageList);
@@ -140,7 +140,6 @@ namespace SaintSender
             {
                 selectedEmailIndex = listViewEmails.FocusedItem.Index;
             }
-            
         }
 
         private void listViewEmails_DoubleClick(object sender, EventArgs e)
